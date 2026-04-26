@@ -15,7 +15,8 @@ import sys
 from dotenv import load_dotenv
 from langchain import hub
 from langchain_core.prompts import ChatPromptTemplate
-from utils import load_yaml, check_env_vars, print_section_header
+from utils import load_yaml, check_env_vars, print_section_header, REQUIRED_LANGSMITH_VARS
+from langsmith import Client
 
 load_dotenv()
 
@@ -31,7 +32,21 @@ def push_prompt_to_langsmith(prompt_name: str, prompt_data: dict) -> bool:
     Returns:
         True se sucesso, False caso contrário
     """
-    ...
+    prompt_info = prompt_data[prompt_name]
+    prompt_template = ChatPromptTemplate.from_messages([
+        ('system', prompt_info['system_prompt']),
+        ('human' , prompt_info['user_prompt']),
+    ])
+
+    client = Client()
+    url = client.push_prompt(
+        prompt_name,
+        object=prompt_template,
+        tags=[ f'v{prompt_info["version"]}', f'created_at: {prompt_info["created_at"]}' ] + prompt_info['tags'],
+        description=prompt_info['description']
+    )
+
+    print_section_header(f'Commit Link: {url}')
 
 
 def validate_prompt(prompt_data: dict) -> tuple[bool, list]:
@@ -44,13 +59,25 @@ def validate_prompt(prompt_data: dict) -> tuple[bool, list]:
     Returns:
         (is_valid, errors) - Tupla com status e lista de erros
     """
+    # TODO: Add validation
     ...
 
 
 def main():
     """Função principal"""
-    ...
+    try:
+        if not check_env_vars(REQUIRED_LANGSMITH_VARS):
+            return 1
 
+        prompt_name = 'bug_to_user_story_v2'
+        prompt_data = load_yaml(f'.\\prompts\\{prompt_name}.yml')
+
+        validate_prompt(prompt_data)
+
+        return 0 if push_prompt_to_langsmith(prompt_name, prompt_data) else 1
+    except Exception as e:
+        print(f'❌ Erro ao enviar arquivo: {e}')
+        return 1
 
 if __name__ == "__main__":
     sys.exit(main())

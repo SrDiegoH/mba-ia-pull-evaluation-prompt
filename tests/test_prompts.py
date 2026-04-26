@@ -11,6 +11,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from utils import validate_prompt_structure
 
+# TODO: Implement tests
+
 def load_prompts(file_path: str):
     """Carrega prompts do arquivo YAML."""
     with open(file_path, 'r', encoding='utf-8') as f:

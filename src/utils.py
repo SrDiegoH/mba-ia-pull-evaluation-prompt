@@ -12,6 +12,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+REQUIRED_LANGSMITH_VARS = [
+    'LANGSMITH_TRACING',
+    'LANGSMITH_ENDPOINT',
+    'LANGSMITH_API_KEY',
+    'LANGSMITH_PROJECT',
+    'USERNAME_LANGSMITH_HUB'
+]
+
+
+yaml.add_representer(list, lambda dumper, data: dumper.represent_sequence('tag:yaml.org,2002:seq', data, flow_style=True))
+yaml.add_representer(str, lambda dumper, data: dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|') if '\n' in data else dumper.represent_scalar('tag:yaml.org,2002:str', data, style='"'))
+
+
 def load_yaml(file_path: str) -> Optional[Dict[str, Any]]:
     """
     Carrega arquivo YAML.
@@ -57,6 +70,8 @@ def save_yaml(data: Dict[str, Any], file_path: str) -> bool:
 
         return True
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         print(f"❌ Erro ao salvar arquivo: {e}")
         return False
 
@@ -187,8 +202,8 @@ def get_llm(model: Optional[str] = None, temperature: float = 0.0):
     Raises:
         ValueError: Se provider não for suportado ou API key não configurada
     """
-    provider = os.getenv('LLM_PROVIDER', 'openai').lower()
-    model_name = model or os.getenv('LLM_MODEL', 'gpt-4o-mini')
+    provider = os.getenv('LLM_PROVIDER', 'google').lower()
+    model_name = model or os.getenv('LLM_MODEL', 'gemini-2.5-flash')
 
     if provider == 'openai':
         from langchain_openai import ChatOpenAI
