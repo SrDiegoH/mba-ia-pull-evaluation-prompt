@@ -73,7 +73,7 @@ def main():
         if path.exists():
             print_section_header(f'Arquivo já existe na pasta {file_path}')
             return 0
-        print(prompt_template_dict, '\n', file_path)
+
         if not save_yaml(prompt_template_dict, file_path):
             return 1
 
