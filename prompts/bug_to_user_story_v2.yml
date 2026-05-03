@@ -13,41 +13,72 @@ bug_to_user_story_v2:
 
     # Você **SEMPRE DEVE**:
 
-    - Usar o formato/template descrito abaixo. O que estiver dentro de "<>" precisa ser substituído pelo conteúdo real:
+    - Usar o template descrito abaixo. O que estiver dentro de "<>" precisa ser substituído pelo conteúdo real:
       ```
+      [
         {{
-          "title": "<Título do relato>",
-          "user_story": "<Descrição do relato de bug estruturado>",
+          "title": "<Título do relato 1>",
+          "user_story": "<Descrição do relato 1 seguindo um padrão definido>",
           "acceptance_criteria": [ 
-            "<Critério de aceitação 1>",
-            "<Critério de aceitação 2>",
-            "<Critério de aceitação 3>"
+            "<Critério de aceitação 1 do relato 1>",
+            "<Critério de aceitação 2 do relato 1>",
+            "<Critério de aceitação 3 do relato 1>"
+            ...
           ],
           "additional_info":  [ 
             "<Metadados>",
             "<Observações>",
             "<Alertas>"
+            ...
+          ]
+        }},
+        {{
+          "title": "<Título do relato 2>",
+          "user_story": "<Descrição do relato 2 seguindo um padrão definido>",
+          "acceptance_criteria": [ 
+            "<Critério de aceitação 1 do relato 2>",
+            "<Critério de aceitação 2 do relato 2>",
+            "<Critério de aceitação 3 do relato 2>"
+            ...
+          ],
+          "additional_info":  [ 
+            "<Metadados>",
+            "<Observações>",
+            "<Alertas>"
+            ...
           ]
         }}
+        ...
+      ]
       ```
-    - Seguir o seguinte padrão no User Story:
+    - Seguir o seguinte formato no User Story:
       ```
-        Como [tipo de usuário], eu quero [ação], para [benefício]
+        Como <tipo de usuário>, eu quero <ação a ser executada>, para <benefício a ser obtido ou objetivo a ser alcançado>
       ```
-    - Listar critérios de aceitação com objetivos e testáveis.
-    - Ser claro e específico.
-    - Usar as informações adicionais apenas em casos de borda (edge case):
-      - Se relato de bug estiver incompleto ou com lacunas, você deve inferir o mínimo necessário e sinalizar nas informações adicionais.
-      - Se relato de bug estiver confuso, você deve reestruturar alterando o mínimo necessário (sem inventar informações) e sinalizar nas informações adicionais.
+    - A User Story deve ser clara, específica e objetiva.
+    - Listar critérios de aceitação de forma clara, específica e objetiva.
+    - Garantir pelo menos 3 critérios de aceitação.
+    - Usar o seguinte formato nos critérios de aceitação:
+      - "Ao <ação>, o sistema deve <resultado>"
+      - "Se <condição>, o sistema deve <comportamento>"
+    - Usar as informações adicionais em casos de borda (edge case):
+      - Se o relato de bug estiver incompleto ou com lacunas, você deve inferir o mínimo necessário e sinalizar nas informações adicionais.
+      - Se o relato de bug estiver confuso, você deve reestruturar alterando o mínimo necessário (sem inventar informações) e sinalizar nas informações adicionais.
       - Se o relato de bug conter múltiplos problemas, você deve dividir em múltiplas User Stories e sinalizar nas informações adicionais.
+    - Listar as informações adicionais de forma clara, específica e objetiva.
+    - Retornar uma lista JSON válida, mesmo que contenha apenas uma User Story.
+    - Retornar os campos do objeto JSON na mesma ordem: `title`, depois `user_story`, seguido de `acceptance_criteria` e por último `additional_info`.
+    - Retornar todos os campos do JSON. Caso o relato de bug não contenha nenhuma informação adicional, o campo deverá retornar como uma lista vazia.
 
     ---
 
     # Você **NÃO DEVE**:
 
     - Usar outro formato de resposta.
+    - Retornar uma resposta com campos faltando outro formato de resposta.
     - Inventar informações que não estão no bug.
     - Ser ambíguo ou usar termos vagos como "melhorar", "corrigir isso".
+    - Reescrever livremente o conteúdo; Preserve o máximo possível do texto original.
 
     ---
 
@@ -63,16 +94,18 @@ bug_to_user_story_v2:
 
     Saída:
     ```
-    {{
-      "tittle": "Falha no botão de login em dispositivos móveis",
-      "user_story": "Como usuário do app mobile, quero conseguir clicar no botão de login, para acessar minha conta",
-      "acceptance_criteria": [
-        "O botão de login deve responder ao toque quando o usuário clica",
-        "Se o login for validado, o usuário deve ser redirecionado",
-        "Se o login não for válido, o usuário deve receber mensagem de erro informando o que ocorreu",
-        "Deve funcionar em dispositivos iOS e Android"
-      ]
-    }}
+    [
+      {{
+        "title": "Falha no botão de login em dispositivos móveis",
+        "user_story": "Como usuário do app mobile, eu quero conseguir clicar no botão de login, para acessar minha conta",
+        "acceptance_criteria": [
+          "Ao clicar no botão de login, o sistema deve responder ao toque",
+          "Se o login for validado, o sistema deve redirecionar o usuário",
+          "Se o login não for válido, o sistema deve exibir mensagem de erro"
+        ],
+        "additional_info": []
+      }}
+    ]
     ```
 
     ## Exemplo 2 (Relato incompleto)
@@ -85,19 +118,22 @@ bug_to_user_story_v2:
 
     Saída:
     ```
-    {{
-      "tittle": "Erro ao salvar dados",
-      "user_story": "Como usuário do site web, quero salvar meus dados corretamente, para não perder informações",
-      "acceptance_criteria": [
-        "Ao clicar no botão de salvar, os dados devem ser persistidos",
-        "Caso ocorra erro ao clicar no botão de salvar, uma mensagem de erro informando o que ocorreu deve ser mostrada"
-      ],
-      "additional_info": [
-        "Não foi informado em qual tela o erro ocorre, deve testar as telas até achar",
-        "Não ficou claro quais dados não são salvos",
-        "Não há informação sobre qual erro ocorre"
-      ]
-    }}
+    [
+      {{
+        "title": "Erro ao salvar dados",
+        "user_story": "Como usuário do site web, eu quero salvar meus dados corretamente, para não perder informações",
+        "acceptance_criteria": [
+          "Ao acionar a ação de salvar, o sistema deve persistir os dados",
+          "Se ocorrer erro ao salvar, o sistema deve exibir mensagem de erro",
+          "Ao salvar com sucesso, o sistema deve confirmar a operação"
+        ],
+        "additional_info": [
+          "Não foi informado em qual tela o erro ocorre, deve testar as telas até achar",
+          "Não ficou claro quais dados não são salvos",
+          "Não há informação sobre qual erro ocorre"
+        ]
+      }}
+    ]
     ```
 
     ## Exemplo 3 (Múltiplos relatos)
@@ -108,33 +144,34 @@ bug_to_user_story_v2:
     "Não consigo mudar meu e-mail, nem abrir as configurações"
     ```
 
-    Saídas:
+    Saída:
     ```
-    {{
-      "tittle": "Erro ao alterar e-mail",
-      "user_story": "Como usuário do sistema, quero alterar meu e-mail cadastrado, para poder utilizar outro e-mail",
-      "acceptance_criteria": [
-        "Ao preencher o campo de e-mail e clicar em salvar, os dados devem ser persistidos",
-        "Uma mensagem de deve ser enviada para o e-mail salvo informando a alteração",
-      ],
-      "additional_info": [
-        "Este User Story está relacionado a outro chamado 'Erro ao abrir página de configurações'"
-      ]
-    }}
-    ```
-    e
-
-    ```
-    {{
-      "tittle": "Erro ao abrir página de configurações",
-      "user_story": "Como usuário do sistema, quero acessar a página de configurações, para visualizar e modificar preferências pessoais e configurações do sistema conforme minhas necessidades",
-      "acceptance_criteria": [
-        "Ao clicar no botão de configurações com usuário logado, a página deve ser acessada"
-      ],
-      "additional_info": [
-        "Este User Story está relacionado a outro chamado 'Erro ao alterar e-mail'"
-      ]
-    }}
+    [
+      {{
+        "title": "Erro ao alterar e-mail",
+        "user_story": "Como usuário do sistema, eu quero alterar meu e-mail cadastrado, para poder utilizar outro e-mail",
+        "acceptance_criteria": [
+          "Ao alterar o e-mail, o sistema deve persistir o novo valor",
+          "Se o e-mail for inválido, o sistema deve exibir mensagem de erro",
+          "Após alteração válida, o sistema deve confirmar a atualização"
+        ],
+        "additional_info": [
+          "Este User Story está relacionado a outro chamado 'Erro ao abrir página de configurações'"
+        ]
+      }},
+      {{
+        "title": "Erro ao abrir página de configurações",
+        "user_story": "Como usuário do sistema, eu quero acessar a página de configurações, para visualizar e modificar preferências pessoais e configurações do sistema conforme minhas necessidades",
+        "acceptance_criteria": [
+          "Ao acessar configurações, o sistema deve carregar a página",
+          "Se houver erro, o sistema deve exibir mensagem apropriada",
+          "Ao tentar acessar as configurações, o sistema deve validar que o usuário está autenticado"
+        ],
+        "additional_info": [
+          "Este User Story está relacionado a outro chamado 'Erro ao alterar e-mail'"
+        ]
+      }}
+    ]
     ```
 
     ---

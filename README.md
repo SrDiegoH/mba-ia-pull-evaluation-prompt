@@ -365,9 +365,37 @@ Obs: Procurei deixar as instruções o mais claras e específicas possíveis. Ta
 
 // TODO: Adicionar resultados finais
 
+Obs: Dado que estou usando o Free Tier do Google, o prompt não foi testado com modelos da Open AI.
+
 ## Como Executar
 
-Para executar, basta seguir o padrão informado.
+### Pré requisitos
+
+1. Python 3.12
+2. Pip 25.0
+3. Windows 11
+
+### Configuração do ambiente
+
+#### 1. Criar e ativar ambiente virtual
+
+```
+# Navegue até a pasta do repositório
+cd [...]\mba-ia-pull-evaluation-prompt
+
+# Criar ambiente virtual
+python -m venv venv
+
+# Ativar ambiente virtual no Windows:
+.\venv\Scripts\activate
+
+# Desativar ambiente virtual no Windows:
+deactivate
+```
+
+### Passo a passo de execução
+
+Passo a passo para executar cada fase:
 1. Baixar o prompt **leonanluppi/bug_to_user_story_v1**: `python .\src\pull_prompts.py`
 2. Testar o prompt **diegohenrique4222/bug_to_user_story_v2**: `pytest .\tests\test_prompts.py`
 3. Publicar o prompt **diegohenrique4222/bug_to_user_story_v2**: `python .\src\push_prompts.py`
@@ -376,3 +404,5 @@ Para executar, basta seguir o padrão informado.
 ## Evidências no LangSmith
 
 - [Link do dashboard](https://smith.langchain.com/hub/diegohenrique4222/bug_to_user_story_v2)
+
+Obs: Dado que estou usando o Free Tier do Google, sou limitado a 20 requests por dia.
