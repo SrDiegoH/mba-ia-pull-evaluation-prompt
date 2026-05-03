@@ -334,3 +334,39 @@ python src/evaluate.py
 - **Não altere os datasets de avaliação** - apenas os prompts em `prompts/bug_to_user_story_v2.yml`
 - **Itere, itere, itere** - é normal precisar de 3-5 iterações para atingir 0.9 em todas as métricas
 - **Documente seu processo** - a jornada de otimização é tão importante quanto o resultado final
+
+---
+---
+---
+
+# Resposta do execício
+
+O arquivo `bug_to_user_story_v2.yml` foi criado na pasta solicitada e os dados ajustados. As properties básicas (**description**, **version** e **created_at**) foram apenas atualizados, já a **tags** não foi atlerada. As principais mudanças foram no texto do **system_prompt**, este foi totalmente refatorado de forma a fica mais claro e legivel, assim formatado como markdown. Já o texto do **user_prompt** foi apenas ajustado com `.md`.
+
+## Técnicas Aplicadas (Fase 2)
+
+O uso do **Few-shot Learning** é obrigatório. Foram criados 3 exemplos:
+- Exemplo 1 com resposta padrão de um relato simples
+- Exemplo 2 com resposta para relato incompleto (edge cases)
+- Exemplo 3 com respostas para múltiplos relatos (edge cases)
+
+Além disso, utilizei a técnica de **Role Prompting** para direcionar melhor a IA com o que deve ser feito. Utilizei o papel de Engenheiro de Software Sênior que fosse capaz de obter os relatos de bugs e convertê-los em User Strory de forma assertiva. Também defini o objetivo para contextualizá-lo de forma assertiva e entender que deve transformar um relato de um bug em User Story com excelência.
+
+Por último, utilizei o **Chain of Thought (CoT)** para deixar a IA "nos trilhos" e realizar os passos da forma mais consistente possível. Segui como passos principais:
+1. Analise diversos pontos no relato de bug.
+2. Definir o título.
+3. Determinar os critérios de aceitação.
+4. Listar informações adicionais.
+5. Criar a resposta em formato estruturado.
+
+## Resultados Finais
+
+// TODO: Adicionar resultados finais
+
+## Como Executar
+
+//
+
+## Evidências no LangSmith
+
+- [Link do dashboard](https://smith.langchain.com/hub/diegohenrique4222/bug_to_user_story_v2)
