@@ -359,6 +359,8 @@ Por último, utilizei o **Chain of Thought (CoT)** para deixar a IA "nos trilhos
 4. Listar informações adicionais.
 5. Criar a resposta em formato estruturado.
 
+Obs: Procurei deixar as instruções o mais claras e específicas possíveis. Também informei regras explicitas do que deve ou não ser feito nos default cases e edge cases.
+
 ## Resultados Finais
 
 // TODO: Adicionar resultados finais
