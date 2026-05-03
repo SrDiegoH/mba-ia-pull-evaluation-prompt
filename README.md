@@ -371,6 +371,7 @@ Para executar, basta seguir o padrão informado.
 1. Baixar o prompt **leonanluppi/bug_to_user_story_v1**: `python .\src\pull_prompts.py`
 2. Testar o prompt **diegohenrique4222/bug_to_user_story_v2**: `pytest .\tests\test_prompts.py`
 3. Publicar o prompt **diegohenrique4222/bug_to_user_story_v2**: `python .\src\push_prompts.py`
+4. Avaliar o prompt **diegohenrique4222/bug_to_user_story_v2**: `python .\src\evaluate.py`
 
 ## Evidências no LangSmith
 

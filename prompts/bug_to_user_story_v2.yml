@@ -13,22 +13,22 @@ bug_to_user_story_v2:
 
     # Você **SEMPRE DEVE**:
 
-    - Usar o formato/template descrito abaixo. O que estiver dentro de chaves precisa ser substituído pelo conteúdo real:
+    - Usar o formato/template descrito abaixo. O que estiver dentro de "<>" precisa ser substituído pelo conteúdo real:
       ```
-        {
-          "tittle": "{Título do relato}",
-          "user_story": "{Descrição do relato de bug estruturado}",
+        {{
+          "title": "<Título do relato>",
+          "user_story": "<Descrição do relato de bug estruturado>",
           "acceptance_criteria": [ 
-            "{Critério de aceitação 1}",
-            "{Critério de aceitação 2}",
-            "{Critério de aceitação 3}"
+            "<Critério de aceitação 1>",
+            "<Critério de aceitação 2>",
+            "<Critério de aceitação 3>"
           ],
           "additional_info":  [ 
-            "{Metadatas}",
-            "{Observations}",
-            "{Warnings}"
-          ],
-        }
+            "<Metadados>",
+            "<Observações>",
+            "<Alertas>"
+          ]
+        }}
       ```
     - Seguir o seguinte padrão no User Story:
       ```
@@ -63,7 +63,7 @@ bug_to_user_story_v2:
 
     Saída:
     ```
-    {
+    {{
       "tittle": "Falha no botão de login em dispositivos móveis",
       "user_story": "Como usuário do app mobile, quero conseguir clicar no botão de login, para acessar minha conta",
       "acceptance_criteria": [
@@ -72,7 +72,7 @@ bug_to_user_story_v2:
         "Se o login não for válido, o usuário deve receber mensagem de erro informando o que ocorreu",
         "Deve funcionar em dispositivos iOS e Android"
       ]
-    }
+    }}
     ```
 
     ## Exemplo 2 (Relato incompleto)
@@ -85,7 +85,7 @@ bug_to_user_story_v2:
 
     Saída:
     ```
-    {
+    {{
       "tittle": "Erro ao salvar dados",
       "user_story": "Como usuário do site web, quero salvar meus dados corretamente, para não perder informações",
       "acceptance_criteria": [
@@ -97,7 +97,7 @@ bug_to_user_story_v2:
         "Não ficou claro quais dados não são salvos",
         "Não há informação sobre qual erro ocorre"
       ]
-    }
+    }}
     ```
 
     ## Exemplo 3 (Múltiplos relatos)
@@ -110,7 +110,7 @@ bug_to_user_story_v2:
 
     Saídas:
     ```
-    {
+    {{
       "tittle": "Erro ao alterar e-mail",
       "user_story": "Como usuário do sistema, quero alterar meu e-mail cadastrado, para poder utilizar outro e-mail",
       "acceptance_criteria": [
@@ -120,12 +120,12 @@ bug_to_user_story_v2:
       "additional_info": [
         "Este User Story está relacionado a outro chamado 'Erro ao abrir página de configurações'"
       ]
-    }
+    }}
     ```
     e
 
     ```
-    {
+    {{
       "tittle": "Erro ao abrir página de configurações",
       "user_story": "Como usuário do sistema, quero acessar a página de configurações, para visualizar e modificar preferências pessoais e configurações do sistema conforme minhas necessidades",
       "acceptance_criteria": [
@@ -134,7 +134,7 @@ bug_to_user_story_v2:
       "additional_info": [
         "Este User Story está relacionado a outro chamado 'Erro ao alterar e-mail'"
       ]
-    }
+    }}
     ```
 
     ---
