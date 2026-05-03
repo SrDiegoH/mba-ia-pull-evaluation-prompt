@@ -15,7 +15,7 @@ import sys
 from dotenv import load_dotenv
 from langchain import hub
 from langchain_core.prompts import ChatPromptTemplate
-from utils import load_yaml, check_env_vars, print_section_header, REQUIRED_LANGSMITH_VARS
+from utils import load_yaml, check_env_vars, print_section_header, REQUIRED_LANGSMITH_VARS, validate_prompt_structure
 from langsmith import Client
 
 load_dotenv()
@@ -59,8 +59,7 @@ def validate_prompt(prompt_data: dict) -> tuple[bool, list]:
     Returns:
         (is_valid, errors) - Tupla com status e lista de erros
     """
-    # TODO: Add validation
-    ...
+    return validate_prompt_structure(prompt_data)
 
 
 def main():

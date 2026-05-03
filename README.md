@@ -350,7 +350,7 @@ O uso do **Few-shot Learning** é obrigatório. Foram criados 3 exemplos:
 - Exemplo 2 com resposta para relato incompleto (edge cases)
 - Exemplo 3 com respostas para múltiplos relatos (edge cases)
 
-Além disso, utilizei a técnica de **Role Prompting** para direcionar melhor a IA com o que deve ser feito. Utilizei o papel de Engenheiro de Software Sênior que fosse capaz de obter os relatos de bugs e convertê-los em User Strory de forma assertiva. Também defini o objetivo para contextualizá-lo de forma assertiva e entender que deve transformar um relato de um bug em User Story com excelência.
+Além disso, utilizei a técnica de **Role Prompting** para direcionar melhor a IA com o que deve ser feito. Utilizei o papel de Engenheiro de Software Sênior que fosse capaz de obter os relatos de bugs e convertê-los em User Strory de forma assertiva. Também defini o objetivo para contextualizá-lo de forma assertiva e entender que deve transformar um relato de um bug em User Story com excelência. Um detalhe é que, embora esta técnica não fosse explicitamente obrigatória, os testes exigem sua utilização.
 
 Por último, utilizei o **Chain of Thought (CoT)** para deixar a IA "nos trilhos" e realizar os passos da forma mais consistente possível. Segui como passos principais:
 1. Analise diversos pontos no relato de bug.
@@ -367,7 +367,10 @@ Obs: Procurei deixar as instruções o mais claras e específicas possíveis. Ta
 
 ## Como Executar
 
-//
+Para executar, basta seguir o padrão informado.
+1. Baixar o prompt **leonanluppi/bug_to_user_story_v1**: `python .\src\pull_prompts.py`
+2. Testar o prompt **diegohenrique4222/bug_to_user_story_v2**: `pytest .\tests\test_prompts.py`
+3. Publicar o prompt **diegohenrique4222/bug_to_user_story_v2**: `python .\src\push_prompts.py`
 
 ## Evidências no LangSmith
 
